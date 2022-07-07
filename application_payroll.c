@@ -51,3 +51,22 @@ Yields $3,519.81, as a greedy company, who only pays overtime because it's the l
 
 And so on for employees 3 - 5
 */
+
+#include <stdio.h>
+
+int main()
+{
+    char employeeOne[20];
+    
+    printf("Welcome to Payola: A Payrol System\n");
+    printf("Version 1.0\n");
+    printf("\n");
+    //request input from user, store to employeeOne
+    
+    printf("Enter name: ");
+    fgets(employeeOne,20,stdin);
+    puts(employeeOne);
+    return 0;
+
+    
+}
