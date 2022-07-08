@@ -57,16 +57,47 @@ And so on for employees 3 - 5
 int main()
 {
     char employeeOne[20];
+    float employeeOne_rate = 0.0f;
+    float employeeOne_hours = 0.0f;
+    float employeeOne_gross = 0.0f;
+    float employeeOne_tax = 0.0f;
+    float employeeOne_takeHome = 0.0f;
+    float taxrate = 0.2f;
     
     printf("Welcome to Payola: A Payrol System\n");
     printf("Version 1.0\n");
     printf("\n");
-    //request input from user, store to employeeOne
-    
+    //request name from user, store to character array
     printf("Enter name: ");
     fgets(employeeOne,20,stdin);
-    puts(employeeOne);
-    return 0;
+    
+    //request payrate from user, store as float
+    printf("Enter hourly rate: ");
+    scanf("%f", &employeeOne_rate);
+    
+    //request hours worked from user, store as float
+
+    printf("Enter hours worked: ");
+    scanf("%f", &employeeOne_hours);
+   
+    //output calculated pay 
+    printf("\n");
+    printf("Pay to: %s", employeeOne);
+    //output dollar rate as float with format #.##
+    printf("Hourly rate: $%.2f\n", employeeOne_rate);
+    printf("Hours worked: %.1f\n\n", employeeOne_hours);
+    
+    //calculations
+    employeeOne_gross = employeeOne_rate * employeeOne_hours;
+    employeeOne_tax = employeeOne_gross * taxrate;
+    employeeOne_takeHome = employeeOne_gross - employeeOne_tax;
+    
+    printf("Gross paid: $%.2f\n", employeeOne_gross);
+    printf("Taxes paid: $%.2f\n", employeeOne_tax);
+    printf("Take home: $%.2f\n", employeeOne_takeHome);
+
+   
+return 0;
 
     
 }
