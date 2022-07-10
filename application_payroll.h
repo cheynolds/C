@@ -1,25 +1,36 @@
 /*
 Payroll Application
-
-Write a program that reads in the first name, hourly rate and number of hours worked for 5 people.
-Print the following details for each employee.
-Name of employee
-The number of hours worked
-Their weekly gross pay
-This is calculated by multiplying hours worked times hourly rate.
-If hours worked per week is greater than 40, then overtime needs to also be included.
-Overtime pay is calculated as the number of hours worked beyond 40 * rate * 1.5
-Taxes withheld
-Our tax system is simple, the government gets 20% of the gross pay.
-Net paid
-The amount of the check issued to the employee.
-
-
-Example
+SAMPLE OUTPUT
+---------------------------
+Welcome to Payola: A Payroll System
+Version 1.0
 
 Enter name: Glenn
 Enter hourly rate: 4.00
 Enter hours worked: 20
+Enter name: Stephanie
+Enter hourly rate: 49.75
+Enter hours worked: 60.5
+Enter name: John
+Enter hourly rate: 39.50
+Enter hours worked: 40
+Enter name: Kyle
+Enter hourly rate: 24.40
+Enter hours worked: 99
+Enter name: Layla 
+Enter hourly rate: 29.3
+Enter hours worked: 50
+
+Preparing calculation module...
+
+
+Loading tax tables...
+
+
+Calculations Complete! 
+
+
+-----Payroll Report-----
 
 Pay to: Glenn
 Hourly rate: $4.00
@@ -30,10 +41,6 @@ Taxes paid: $16.00
 Take home: $64.00
 
 
-Enter name: Stephanie
-Enter hourly rate: 49.75
-Enter hours worked: 60.5
-
 Pay to: Stephanie
 Hourly rate: $49.75
 Hours worked: 60.5
@@ -42,14 +49,33 @@ Gross paid: $3519.81
 Taxes paid: $703.96
 Take home: $2815.85
 
-Math used for Stephanie.
 
-Gross paid = 40 * 49.75 -> $1,990
-Plus the amount earned working overtime = 20.5 * 49.75 * 1.5 -> 1529.8125
-Yields $3,519.81, as a greedy company, who only pays overtime because it's the lay, we'll keep that extra quarter penny.
+Pay to: John
+Hourly rate: $39.50
+Hours worked: 40.0
+
+Gross paid: $1580.00
+Taxes paid: $316.00
+Take home: $1264.00
 
 
-And so on for employees 3 - 5
+Pay to: Kyle
+Hourly rate: $24.40
+Hours worked: 99.0
+
+Gross paid: $3135.40
+Taxes paid: $627.08
+Take home: $2508.32
+
+
+Pay to: Layla
+Hourly rate: $29.30
+Hours worked: 50.0
+
+Gross paid: $1611.50
+Taxes paid: $322.30
+Take home: $1289.20
+---------------------------
 */
 
 #include <stdio.h>
@@ -101,7 +127,7 @@ int main()
     float overtime_rate = 1.5f;
     int fulltime_hours = 40;
     
-    printf("Welcome to Payola: A Payrol System\n");
+    printf("Welcome to Payola: A Payroll System\n");
     printf("Version 1.0\n");
     printf("\n");
     
@@ -164,7 +190,6 @@ int main()
     else
     {
         employeeTwo_hours_overage = employeeTwo_hours - fulltime_hours;
-        printf("%.2f", employeeTwo_hours_overage);
         employeeTwo_gross = (fulltime_hours*employeeTwo_rate) + (overtime_rate*employeeTwo_rate*employeeTwo_hours_overage); 
         employeeTwo_tax = employeeTwo_gross * taxrate;
         employeeTwo_takeHome = employeeTwo_gross - employeeTwo_tax;
@@ -197,7 +222,6 @@ int main()
     else
     {
         employeeThree_hours_overage = employeeThree_hours - fulltime_hours;
-        printf("%.2f", employeeThree_hours_overage);
         employeeThree_gross = (fulltime_hours*employeeThree_rate) + (overtime_rate*employeeThree_rate*employeeThree_hours_overage); 
         employeeThree_tax = employeeThree_gross * taxrate;
         employeeThree_takeHome = employeeThree_gross - employeeThree_tax;
@@ -230,7 +254,6 @@ int main()
     else
     {
         employeeFour_hours_overage = employeeFour_hours - fulltime_hours;
-        printf("%.2f", employeeFour_hours_overage);
         employeeFour_gross = (fulltime_hours*employeeFour_rate) + (overtime_rate*employeeFour_rate*employeeFour_hours_overage); 
         employeeFour_tax = employeeFour_gross * taxrate;
         employeeFour_takeHome = employeeFour_gross - employeeFour_tax;
@@ -263,7 +286,6 @@ int main()
     else
     {
         employeeFive_hours_overage = employeeFive_hours - fulltime_hours;
-        printf("%.2f", employeeFive_hours_overage);
         employeeFive_gross = (fulltime_hours*employeeFive_rate) + (overtime_rate*employeeFive_rate*employeeFive_hours_overage); 
         employeeFive_tax = employeeFive_gross * taxrate;
         employeeFive_takeHome = employeeFive_gross - employeeFive_tax;
