@@ -1,8 +1,9 @@
 /*
-Example, 
+Examples Included 
 Defining a Function
 Calling a Function
 Returning a Function Result
+*/
 
 #include <stdio.h>
 
