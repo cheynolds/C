@@ -1,5 +1,10 @@
 /*
 Payroll Application
+A simple application to demonstrate the benefits of loops and functions, but done in their absense. 353 lines of code is the starting point.
+How much can it be simplied with functions and loops?
+
+
+
 SAMPLE OUTPUT
 ---------------------------
 Welcome to Payola: A Payroll System
