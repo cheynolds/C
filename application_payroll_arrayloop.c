@@ -1,8 +1,87 @@
+/*
+Payroll Application 2.0
+CS 36 - IVC Summer 2022
+Chris Reynolds
+Program 2
+
+SAMPLE INPUT
+
+Glenn
+2.00
+50
+Stephanie
+25
+50
+Kyle
+80.24
+100
+John
+48.48
+38.9
+Ron
+49
+23.12
+
+SAMPLE OUTPUT
+
+Welcome to Payola: A Payroll System
+Version 2.0
+
+
+Please enter the name of employee #1: Please enter the hourly rate of employee #1: Please enter the hours worked by employee #1: Please enter the name of employee #2: Please enter the hourly rate of employee #2: Please enter the hours worked by employee #2: Please enter the name of employee #3: Please enter the hourly rate of employee #3: Please enter the hours worked by employee #3: Please enter the name of employee #4: Please enter the hourly rate of employee #4: Please enter the hours worked by employee #4: Please enter the name of employee #5: Please enter the hourly rate of employee #5: Please enter the hours worked by employee #5:
+
+Employee #1: Glenn
+Employee #1 hours worked: 50.0
+Employee #1 hourly rate: $2.00
+Employee #1 gross pay: $110.00
+Employee #1 base pay: $80.00
+Employee #1 overtime pay: $30.00
+Employee #1 taxes paid: $22.00
+Employee #1 net pay: $88.00
+
+Employee #2: Stephanie
+Employee #2 hours worked: 50.0
+Employee #2 hourly rate: $25.00
+Employee #2 gross pay: $1375.00
+Employee #2 base pay: $1000.00
+Employee #2 overtime pay: $375.00
+Employee #2 taxes paid: $275.00
+Employee #2 net pay: $1100.00
+
+Employee #3: Kyle
+Employee #3 hours worked: 100.0
+Employee #3 hourly rate: $80.24
+Employee #3 gross pay: $10431.20
+Employee #3 base pay: $3209.60
+Employee #3 overtime pay: $7221.60
+Employee #3 taxes paid: $2086.24
+Employee #3 net pay: $8344.96
+
+Employee #4: John
+Employee #4 hours worked: 38.9
+Employee #4 hourly rate: $48.48
+Employee #4 gross pay: $1885.87
+Employee #4 base pay: $0.00
+Employee #4 overtime pay: $0.00
+Employee #4 taxes paid: $377.17
+Employee #4 net pay: $1508.70
+
+Employee #5: Ron
+Employee #5 hours worked: 23.1
+Employee #5 hourly rate: $49.00
+Employee #5 gross pay: $1132.88
+Employee #5 base pay: $0.00
+Employee #5 overtime pay: $0.00
+Employee #5 taxes paid: $226.58
+Employee #5 net pay: $906.30
+
+*/
+
 #include <stdio.h>
 #include <string.h>
 
-void splash();
-void payroll();
+void splash(void);
+void payroll(void);
 
 int main()
 {
@@ -28,8 +107,8 @@ void payroll()
     int i=0;
     float taxrate = 0.2f;
     float overtime_rate = 1.5f;
-    int fulltime_hours = 40;
-    int exitCheck=0;
+    
+    // get employee input, check for -1 input to cancel
     for(i=0; i<5; i++)
     {
         printf("Please enter the name of employee #%d: ", i+1);
@@ -66,7 +145,7 @@ void payroll()
             *employeeOverage[i] = *employeeHours[i] - 40;
             *employeeBase[i] = 40 * *employeeRate[i];
             *employeeOvertime[i] = (overtime_rate * *employeeRate[i] * *employeeOverage[i]);
-            *employeeGross[i] = *employeeBase[i] + *employeeOvertime[i]; 
+            *employeeGross[i] = *employeeBase[i] + *employeeOvertime[i];
             *employeeTax[i] =  *employeeGross[i] * taxrate;
             *employeeTakehome[i] = *employeeGross[i] - *employeeTax[i];
         }
