@@ -1,33 +1,13 @@
-
 #include <stdio.h>
 #include <string.h>
 
-void Load(int* x)
+
+int main() 
 {
-	*x = 25;
-}
+	// the name of the file, and how to interact with that file
+	FILE* dataFileToBeCreated = fopen("myDataFile.txt", "w");
 
-void Load1(int** x)
-{
-	*x = 0x21ffabcd00;
-}
-
-int main()
-{
-	int x = 1;
-	int* p = &x;
-	Load(&x);
-	Load1(&p);
-	// both x & p are altered, as we passed where in memory they were
-
-	char fileName[50];
-	puts("Name of the file?");
-	scanf("%s", fileName);
-
-	FILE* dataFileToBeCreated;
-	int error = fopen_s(&dataFileToBeCreated, fileName, "w");
-
-	if (error != 0)
+	if (dataFileToBeCreated == 0)
 	{
 		puts("Failed to open file, do you have the path correct?");
 		return -1;
@@ -43,7 +23,7 @@ int main()
 	fputc(10, dataFileToBeCreated);
 	fputc(13, dataFileToBeCreated);
 
-	fclose(dataFileToBeCreated);
+	fclose(dataFileToBeCreated);	
 
 	return 0;
 }
