@@ -1,11 +1,7 @@
 /*
 Payroll Application 2.0
-CS 36 - IVC Summer 2022
-Chris Reynolds
-Program 2
 
 SAMPLE INPUT
-
 Glenn
 2.00
 50
@@ -23,7 +19,6 @@ Ron
 23.12
 
 SAMPLE OUTPUT
-
 Welcome to Payola: A Payroll System
 Version 2.0
 
