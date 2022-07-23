@@ -35,37 +35,57 @@ Total Paid to all employees = $110.00
 
 
 #include <stdio.h>
-#include <string.h>
+#include <string.h> 
 
-void splash(void);
-float loadEmployee(char employeeName);
+ 
+void collectInput(char *employeeNames)
+{ 
+  char names[5][40]; 
+  int i = 0; 
+	 
+  for( ; i < 5; i++ ) { 
+    printf( "Enter name : " ); 
+    fgets( names[i], 40, stdin ); 
+  } 
+    printf( "\nList of names:\n" ); 
+  
+  for( i = 0; i < 5; i++ ) 
+    printf( "[%40s]\n", names[i] ); 
+} 
 
-int main()
+
+void output(char *employeeNames)
+{ 
+  char names[5][40]; 
+  int i = 0; 
+	 
+    printf( "\nList of names:\n" ); 
+  
+  for( i = 0; i < 5; i++ ) 
+    printf( "[%40s]\n", names[i] ); 
+
+} 
+void calculate()
 {
-    
-    splash();
-    payroll();
-
-  return 0;
+    ;
 }
-
-void payroll()
-{
-
-}
-
 
 void splash()
 {
     printf("Welcome to Payola: A Payroll System\n");
-    printf("Version 2.0\n");
+    printf("Version 3.0\n");
     printf("\n\n");
 }
-*/
 
+int main() 
+{
+    char *employeeNames[5];
+    splash();
+    collectInput(*employeeNames);
+    calculate();
+    output(*employeeNames);
 
-
-
+}
 
 
 
