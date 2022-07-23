@@ -35,17 +35,33 @@ Total Paid to all employees = $110.00
 
 
 #include <stdio.h>
+#include <string.h>
+
+void splash(void);
+float loadEmployee(char employeeName);
 
 int main()
 {
-   
+    
+    splash();
+    payroll();
 
-    return 0;
+  return 0;
+}
+
+void payroll()
+{
+
 }
 
 
-
-
+void splash()
+{
+    printf("Welcome to Payola: A Payroll System\n");
+    printf("Version 2.0\n");
+    printf("\n\n");
+}
+*/
 
 
 
