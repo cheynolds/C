@@ -35,52 +35,65 @@ Total Paid to all employees = $110.00
 
 #include <stdio.h>
 #include <string.h> 
+#define _CRT_SECURE_NO_WARNINGS
 
 //a function that prompts the user for hours worked, rate and name. Use parameter passing, and pass by reference.
-void employeeLoadInfo(char name[],float *hours,float *rate,int *empTotal)
+void employeeLoadInfo(char name[],float *hours,float *rate,int *empNum)
 { 
-    int local_empTotal;
-    //int local_count;
-    
-    local_empTotal = *empTotal +1;
-        printf("Please enter the NAME of employee #%d: ", local_empTotal);
+        printf("Please enter the NAME of employee #%d: ", *empNum +1);
         scanf("%s", name);
-        printf("Please enter the HOURS employee #%d worked: ", local_empTotal);
-        scanf("%f", hours);
-        printf("Please enter the PAY RATE of employee #%d: ", local_empTotal);
+        printf("Please enter the PAY RATE of employee #%d: ", *empNum +1);
         scanf("%f", rate);
+        printf("Please enter the HOURS employee #%d worked: ", *empNum +1);
+        scanf("%f", hours);
         printf("\n");
-
-  
 } 
 
 //a print function that generates the output, including the total amount paid, in addition to the data for each employee.
-void employeePrintInfo(char name[],float *hours,float *rate,int *empTotal)
+void employeePrintInfo(char name[],float *hours,float *rate,int *empNum, float *base, float *gross, float*overtime, float *taxpaid)
 { 
-    int local_empTotal;
-
+    int local_empNum;
+    local_empNum = *empNum +1;
+    float net = *gross - *taxpaid;
     
- 
-    local_empTotal = *empTotal +1;
-    
-        printf("\n\nEmployee #%d NAME: %s", local_empTotal, name);
-        printf("\nEmployee #%d HOURS WORKED: %.1f", local_empTotal, *hours);
-        printf("\nEmployee #%d HOURLY RATE: $%.2f", local_empTotal, *rate);
-
+    printf("\n\nEmployee #%d NAME: %s", local_empNum, name);
+    printf("\nEmployee #%d HOURS worked: %.1f", local_empNum, *hours);
+    printf("\nEmployee #%d RATE hourly: $%.2f", local_empNum, *rate);
+    printf("\nEmployee #%d BASE amount: $%.2f", local_empNum, *base);
+    printf("\nEmployee #%d GROSS amount: $%.2f", local_empNum, *gross);
+    printf("\nEmployee #%d OVERTIME amount: $%.2f", local_empNum, *overtime);
+    printf("\nEmployee #%d TAXES paid: $%.2f", local_empNum, *taxpaid);
+    printf("\nEmployee #%d NET paid: $%.2f", local_empNum, net);
 } 
 
 //a function that calculates the gross, base and overtime pay, pass by reference.
-//Calculate the total amount paid (gross pay) for all 5 people. 
-//Use the return value from the function that calculates the gross pay.
-void employeeCalcgross()
-{
-    ;
+//calculate the total amount paid (gross pay) for all 5 people. 
+//use the return value from the function that calculates the gross pay.
+//parameter notes: hours and rate are passed by value, gross base and overtime
+//are passed by reference so the value can be updated after calculating
+float employeeCalcgross(float *hours, float *rate, float *gross, float *base, float *overtime)
+{   
+    if (*hours <= 40.0f)
+    {
+        *base = *hours * *rate;
+        *overtime = 0.0f;
+        *gross = *base;
+    }
+    else if (*hours > 40.0f)
+    {
+        *base = (40.0f) * *rate;
+        *overtime = (*hours - 40.0f) * *rate * 1.5f;
+        *gross = *base + *overtime;
+    }
+    return *gross;
 }
 
 //a function that calculates tax, taking as input the gross pay, returning the tax owed.
-void employeeCalctax()
+float employeeCalctax(float gross)
 {
-    ;
+    float tax = 0.0f;
+    tax = gross * 0.2f;
+    return tax;
 }
 
 void splash()
@@ -92,39 +105,61 @@ void splash()
 
 int main(void) 
 {
-    
     char name[5][40];
     float hours[5];
     float rate[5];
     float gross[5];
     float base[5];
     float overtime[5];
-    float taxes[5];
+    float taxpaid[5];
     float totalpaid = 0;
+    
     int i = 0;
-    int empTotal = 0;
+    int empNum = 0;
+    
+    //load title, version info (and graphics TBD)
     splash();
     
+    //get the employee name, hours worked and hourly pay rate
+        for (int i = 0; i < 5; i++)
+        {
+            //call function and pass char* array and float arrays by reference
+            employeeLoadInfo(name[i], &hours[i], &rate[i], &empNum);
+            if (name[i][0] == '-' && name[i][1] == '1') 
+            {
+                break;
+            }
+            else if (hours[i] == -1 || rate[i] == -1) 
+            {
+                break;
+            }
+            empNum ++;
+        }
+        //reset count 
+        empNum = 0;
+    
+    //calculate the gross base and overtime
     for (int i = 0; i < 5; i++)
     {
-        employeeLoadInfo(name[i], &hours[i], &rate[i], &empTotal);
-        if (name[i][0] == '-' && name[i][1] == '1') 
-        {
-            break;
-        }
-        else if (hours[i] == -1 || rate[i] == -1) 
-        {
-            break;
-        }
-        empTotal ++;
+        
+        totalpaid += employeeCalcgross(&hours[i], &rate[i], &gross[i], &base[i], &overtime[i]);
+
     }
     
-    empTotal = 0;
+    //calculate the tax
     for (int i = 0; i < 5; i++)
     {
-        employeePrintInfo(name[i], &hours[i], &rate[i], &empTotal);
-        empTotal ++;
+        taxpaid[i] = employeeCalctax(gross[i]);
     }
+    
+    //output the employee payroll report
+    for (int i = 0; i < 5; i++)
+    {
+        employeePrintInfo(name[i], &hours[i], &rate[i], &empNum, &gross[i], &base[i], &overtime[i], &taxpaid[i]);
+        empNum ++;
+    }
+    //print total paid to employees
+    printf("\n\nTOTAL PAYROLL COST: $%.2f", totalpaid);
 
 }
 /*
