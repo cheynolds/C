@@ -37,22 +37,25 @@ Total Paid to all employees = $110.00
 #include <string.h> 
 
 //a function that prompts the user for hours worked, rate and name. Use parameter passing, and pass by reference.
-void employeeLoadInfo(char name[],float *hours,float rate,int *empTotal)
+void employeeLoadInfo(char name[],float *hours,float *rate,int *empTotal)
 { 
     int local_empTotal;
-    int local_count;
+    //int local_count;
     
     local_empTotal = *empTotal +1;
-        printf("Please enter the name of employee #%d: ", local_empTotal);
+        printf("Please enter the NAME of employee #%d: ", local_empTotal);
         scanf("%s", name);
-        printf("Please enter the hours of employee #%d: ", local_empTotal);
+        printf("Please enter the HOURS employee #%d worked: ", local_empTotal);
         scanf("%f", hours);
+        printf("Please enter the PAY RATE of employee #%d: ", local_empTotal);
+        scanf("%f", rate);
+        printf("\n");
 
   
 } 
 
 //a print function that generates the output, including the total amount paid, in addition to the data for each employee.
-void employeePrintInfo(char name[],float *hours,float rate,int *empTotal)
+void employeePrintInfo(char name[],float *hours,float *rate,int *empTotal)
 { 
     int local_empTotal;
 
@@ -60,8 +63,10 @@ void employeePrintInfo(char name[],float *hours,float rate,int *empTotal)
  
     local_empTotal = *empTotal +1;
     
-        printf("\nEmployee #%d: %s", local_empTotal, name);
-        printf("\nEmployee #%d: %f", local_empTotal, *hours);
+        printf("\n\nEmployee #%d NAME: %s", local_empTotal, name);
+        printf("\nEmployee #%d HOURS WORKED: %.1f", local_empTotal, *hours);
+        printf("\nEmployee #%d HOURLY RATE: $%.2f", local_empTotal, *rate);
+
 } 
 
 //a function that calculates the gross, base and overtime pay, pass by reference.
@@ -102,7 +107,7 @@ int main(void)
     
     for (int i = 0; i < 5; i++)
     {
-        employeeLoadInfo(name[i], &hours[i], rate[i], &empTotal);
+        employeeLoadInfo(name[i], &hours[i], &rate[i], &empTotal);
         if (name[i][0] == '-' && name[i][1] == '1') 
         {
             break;
@@ -117,12 +122,11 @@ int main(void)
     empTotal = 0;
     for (int i = 0; i < 5; i++)
     {
-        employeePrintInfo(name[i], &hours[i], rate[i], &empTotal);
+        employeePrintInfo(name[i], &hours[i], &rate[i], &empTotal);
         empTotal ++;
     }
 
 }
-
 /*
 Payroll Application 2.0
 
