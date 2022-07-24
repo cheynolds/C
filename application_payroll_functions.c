@@ -34,6 +34,7 @@ Total Paid to all employees = $110.00
  (The grand total of payments out.) */
 
 
+
 #include <stdio.h>
 #include <string.h> 
 
@@ -47,10 +48,7 @@ void collectInput(char *employeeNames)
     printf( "Enter name : " ); 
     fgets( names[i], 40, stdin ); 
   } 
-    printf( "\nList of names:\n" ); 
   
-  for( i = 0; i < 5; i++ ) 
-    printf( "[%40s]\n", names[i] ); 
 } 
 
 
@@ -58,12 +56,13 @@ void output(char *employeeNames)
 { 
   char names[5][40]; 
   int i = 0; 
-	 
-    printf( "\nList of names:\n" ); 
-  
-  for( i = 0; i < 5; i++ ) 
-    printf( "[%40s]\n", names[i] ); 
 
+  for( i = 0; i < 5; i++ ) 
+  {
+    printf( "Employee Name: %s\n", names[i] ); 
+
+      
+  }
 } 
 void calculate()
 {
@@ -80,13 +79,13 @@ void splash()
 int main() 
 {
     char *employeeNames[5];
+    
     splash();
     collectInput(*employeeNames);
     calculate();
     output(*employeeNames);
 
 }
-
 
 
 /*
