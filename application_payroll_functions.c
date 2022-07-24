@@ -33,38 +33,47 @@ Total Paid to all employees = $110.00
 
  (The grand total of payments out.) */
 
-
-
 #include <stdio.h>
 #include <string.h> 
 
- 
-void collectInput(char *employeeNames)
+//a function that prompts the user for hours worked, rate and name. Use parameter passing, and pass by reference.
+void employeeLoadInfo(char name[],float *hours,float rate,int *empTotal)
 { 
-  char names[5][40]; 
-  int i = 0; 
-	 
-  for( ; i < 5; i++ ) { 
-    printf( "Enter name : " ); 
-    fgets( names[i], 40, stdin ); 
-  } 
+    int local_empTotal;
+    int local_count;
+    
+    local_empTotal = *empTotal +1;
+        printf("Please enter the name of employee #%d: ", local_empTotal);
+        scanf("%s", name);
+        printf("Please enter the hours of employee #%d: ", local_empTotal);
+        scanf("%f", hours);
+
   
 } 
 
-
-void output(char *employeeNames)
+//a print function that generates the output, including the total amount paid, in addition to the data for each employee.
+void employeePrintInfo(char name[],float *hours,float rate,int *empTotal)
 { 
-  char names[5][40]; 
-  int i = 0; 
+    int local_empTotal;
 
-  for( i = 0; i < 5; i++ ) 
-  {
-    printf( "Employee Name: %s\n", names[i] ); 
-
-      
-  }
+    
+ 
+    local_empTotal = *empTotal +1;
+    
+        printf("\nEmployee #%d: %s", local_empTotal, name);
+        printf("\nEmployee #%d: %f", local_empTotal, *hours);
 } 
-void calculate()
+
+//a function that calculates the gross, base and overtime pay, pass by reference.
+//Calculate the total amount paid (gross pay) for all 5 people. 
+//Use the return value from the function that calculates the gross pay.
+void employeeCalcgross()
+{
+    ;
+}
+
+//a function that calculates tax, taking as input the gross pay, returning the tax owed.
+void employeeCalctax()
 {
     ;
 }
@@ -76,17 +85,43 @@ void splash()
     printf("\n\n");
 }
 
-int main() 
+int main(void) 
 {
-    char *employeeNames[5];
     
+    char name[5][40];
+    float hours[5];
+    float rate[5];
+    float gross[5];
+    float base[5];
+    float overtime[5];
+    float taxes[5];
+    float totalpaid = 0;
+    int i = 0;
+    int empTotal = 0;
     splash();
-    collectInput(*employeeNames);
-    calculate();
-    output(*employeeNames);
+    
+    for (int i = 0; i < 5; i++)
+    {
+        employeeLoadInfo(name[i], &hours[i], rate[i], &empTotal);
+        if (name[i][0] == '-' && name[i][1] == '1') 
+        {
+            break;
+        }
+        else if (hours[i] == -1 || rate[i] == -1) 
+        {
+            break;
+        }
+        empTotal ++;
+    }
+    
+    empTotal = 0;
+    for (int i = 0; i < 5; i++)
+    {
+        employeePrintInfo(name[i], &hours[i], rate[i], &empTotal);
+        empTotal ++;
+    }
 
 }
-
 
 /*
 Payroll Application 2.0
