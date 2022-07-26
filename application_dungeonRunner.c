@@ -95,8 +95,6 @@ void PrintStats (Gamer* gamer)
 }
 
 Enemy FindEnemy()
-
-
 {
     Enemy badGuy;
     int result = rand() %10;
@@ -141,7 +139,7 @@ void PrintEnemy(Enemy* enemy)
 
 }
 
-void DisplayFightOptions()
+int DisplayFightOptions()
 {
     puts("Choose what to do:");
     puts("1. attack, 2. health 3. runaway");
@@ -166,12 +164,13 @@ void Attack(Gamer* gamer, Enemy* enemy)
         {   
             int damage = rand() %3 + 1;
             puts("hit monster for %d\n" damage, damage)
+        }   
     }
 }
 
 void Heal(Gamer* gamer)
 {
-
+;
 }
 
 int AttemptFlee(Enemy* enemy)
@@ -180,8 +179,11 @@ int AttemptFlee(Enemy* enemy)
 }
 void Fight(Gamer* gamer, Enemy* enemy)
 {
+    do{
     PrintStats(gamer);
     PrintEnemy(enemy);
+    
+
     switch (option)
     {
         case 1:
@@ -193,6 +195,7 @@ void Fight(Gamer* gamer, Enemy* enemy)
             if (AttemptFlee(enemy))
                 return;
     }
+    }while (1);
 }
 
 int main()
@@ -202,6 +205,6 @@ int main()
     PrintStats(&gamer);
     Enemy badGuy = FindEnemy();
     PrintEnemy(&badGuy);
-
+    
     return 0;
 }
