@@ -51,7 +51,7 @@ void loadMenu(Employees *employee, int *empCount, float *gross)
 {
     int menuInput = 0;
     puts("\n\n\n");
-    puts("MAIN MENU");
+    puts("MAIN MENU \U0001F6D1");
     puts("---------\n\nEnter a selection to continue: \n");
     puts("Press 1 to LOAD a record(s)");
     puts("Press 2 to ADD a record");
@@ -304,9 +304,9 @@ int main(void)
     return 0;
 }
 
+
 void splash()
-{
-    
+{    
     puts("\n\n\n\n\n");
     puts("                                                                             d8b");
     puts("                                                                             88P");
@@ -318,12 +318,17 @@ void splash()
     puts("                       88P'                             )88");
     puts("                       d88                              ,d8P");
     puts("                       ?8P                           `?888P'");
-    puts("\n");
-    puts("                                    Welcome to Payola: A Payroll System\n");
-    puts("                                          By CHEYNOLDS (Chris Reynolds)\n");
-    puts("                                                  Version 5.0\n");
+    puts("\n\n\n\n");
+    puts("                                                      \U0001F4B2\n");
+    puts("                              Welcome to Payola: A Payroll Reporting Application\n");
+    puts("                                          Developed by Chris Reynolds");
+    puts("                                              Coded by Chris Reynolds\n");
+    puts("                                                      \U0001FAE0\n");
+    puts("                                         For Professor Glen Cuevas");
+    puts("                                          IVC C Programming - Final Project\n");
+    puts("                                                  Version 0.0.5\n");
     puts("\n\n");
-    puts("                                             Press enter to begin\n");
+    puts("                                               Press enter to begin\n");
     getchar();
     system("clear");
 }
