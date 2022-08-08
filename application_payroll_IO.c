@@ -218,22 +218,40 @@ void saveFile(Employees * employee, int *empCount, float *gross)
     FILE *outputFile;
     outputFile = fopen(fileName, "w");
     
-    fclose(outputFile);
+
     sleep(2);
     printf("Success! The following output was saved to file '%s'", fileName);
     for (int i = 0; i < *empCount; i++)
         {
             printf("\n\nEmployee #%d NAME: %s", i+1, employee[i].name);
+            fprintf(outputFile, "\n\nEmployee #%d NAME: %s", i+1, employee[i].name);
+            
             printf("\nEmployee #%d HOURS worked: %.1f", i+1, employee[i].hours);
+            fprintf(outputFile, "\nEmployee #%d HOURS worked: %.1f", i+1, employee[i].hours);
+            
             printf("\nEmployee #%d RATE hourly: $%.2f", i+1, employee[i].rate);
+            fprintf(outputFile, "\nEmployee #%d RATE hourly: $%.2f", i+1, employee[i].rate);
+            
             printf("\nEmployee #%d BASE amount: $%.2f", i+1, employee[i].base);
+            fprintf(outputFile, "\nEmployee #%d BASE amount: $%.2f", i+1, employee[i].base);
+            
             printf("\nEmployee #%d GROSS amount: $%.2f", i+1, employee[i].gross);
+            fprintf(outputFile, "\nEmployee #%d GROSS amount: $%.2f", i+1, employee[i].gross);
+            
             printf("\nEmployee #%d OVERTIME amount: $%.2f", i+1, employee[i].overtime);
+            fprintf(outputFile, "\nEmployee #%d OVERTIME amount: $%.2f", i+1, employee[i].overtime);
+            
             printf("\nEmployee #%d TAXES paid: $%.2f", i+1, employee[i].tax);
+            fprintf(outputFile, "\nEmployee #%d TAXES paid: $%.2f", i+1, employee[i].tax);
+            
             printf("\nEmployee #%d NET paid: $%.2f", i+1, employee[i].net);
+            fprintf(outputFile, "\nEmployee #%d NET paid: $%.2f", i+1, employee[i].net);
         }
         
     printf("\n\nTOTAL PAYROLL COST: $%.2f", *gross);
+    fprintf(outputFile,"\n\nTOTAL PAYROLL COST: $%.2f", *gross);
+
+    fclose(outputFile);
     sleep(2);
     loadMenu(employee, empCount, gross);
 }
