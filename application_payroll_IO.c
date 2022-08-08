@@ -40,6 +40,8 @@ typedef struct
     float tax;
     float net;
 } Employees;
+
+void splash();
 void saveFile(Employees * employee, int *empCount, float *gross);
 void processMenu(int menuInput, Employees *employee, int *empCount, float *gross);
 float calcEmp(Employees* employee, int *empCount, float *gross);
@@ -48,6 +50,7 @@ int getEmp(int *empCount, Employees* employee, float *gross);
 void loadMenu(Employees *employee, int *empCount, float *gross)
 {
     int menuInput = 0;
+    puts("\n\n\n");
     puts("MAIN MENU");
     puts("---------\n\nEnter a selection to continue: \n");
     puts("Press 1 to LOAD a record(s)");
@@ -198,19 +201,24 @@ void printRecord_all(Employees * employee, int *empCount, float *gross)
     loadMenu(employee, empCount, gross);
 }
 
-void splash()
-{
-    printf("Welcome to Payola: A Payroll System\n");
-    printf("Version 4.0\n");
-    printf("\n\n");
-}
+
 
 void saveFile(Employees * employee, int *empCount, float *gross)
 {
+    
+    if (*empCount <=1)
+    {
+        puts("Nothing to save. Add a record from the main menu\n\n");
+        loadMenu(employee, empCount, gross);
+    }
     char fileName[30];
     puts("Filename to save?");
     scanf(" %s", fileName);
     puts("Saving...");
+    FILE *outputFile;
+    outputFile = fopen(fileName, "w");
+    
+    fclose(outputFile);
     sleep(2);
     printf("Success! The following output was saved to file '%s'", fileName);
     for (int i = 0; i < *empCount; i++)
@@ -295,3 +303,34 @@ int main(void)
     loadMenu(employee, &empCount, &gross);
     return 0;
 }
+
+void splash()
+{
+    
+    puts("\n\n\n\n\n");
+    puts("                                                                             d8b");
+    puts("                                                                             88P");
+    puts("                                                                            d88");
+    puts("                      ?88,.d88b,     d888b8b      ?88   d8P      d8888b     888       d888b8b");
+    puts("                      `?88'  ?88    d8P' ?88      d88   88      d8P' ?88    ?88      d8P' ?88");
+    puts("                        88b  d8P    88b  ,88b     ?8(  d88      88b  d88     88b     88b  ,88b ");
+    puts("                        888888P'    `?88P'`88b    `?88P'?8b     `?8888P'      88b    `?88P'`88b");
+    puts("                       88P'                             )88");
+    puts("                       d88                              ,d8P");
+    puts("                       ?8P                           `?888P'");
+    puts("\n");
+    puts("                                    Welcome to Payola: A Payroll System\n");
+    puts("                                          By CHEYNOLDS (Chris Reynolds)\n");
+    puts("                                                  Version 5.0\n");
+    puts("\n\n");
+    puts("                                             Press enter to begin\n");
+    getchar();
+    system("clear");
+}
+
+
+
+
+
+
+
