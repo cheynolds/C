@@ -50,9 +50,9 @@ int getEmp(int *empCount, Employees* employee, float *gross, int* fileChange);
 void loadMenu(Employees *employee, int *empCount, float *gross, int *fileChange)
 {
     int menuInput = 0;
-    puts("\n\n\n");
+    puts("\n\n");
     puts("  MAIN MENU \U0001F6D1");
-    puts("  ---------\n\nEnter a selection to continue: \n");
+    puts("  ---------\n\n  Enter a selection to continue: \n");
     puts("  Press 1 to LOAD a record(s) from FILE");
     puts("  Press 2 to ADD a record");
     puts("  Press 3 to UPDATE a record");
@@ -202,6 +202,20 @@ void printRecord_all(Employees * employee, int *empCount, float *gross, int* fil
 }
 
 
+void loadFile(Employees * employee, int *empCount, float *gross, int* fileChange)
+{
+    char fileName[30];
+    puts("Filename to load?");
+    scanf(" %s", fileName);
+    puts("Loading...\n");
+    sleep(1);
+    FILE *inputFile;
+    inputFile = fopen(fileName, "r");
+    for (int i = 0; i < *empCount; i++)
+    {
+        fscanf(inputFile, "%s", employee[i].name);
+    }
+}
 
 void saveFile(Employees * employee, int *empCount, float *gross, int* fileChange)
 {
@@ -212,7 +226,7 @@ void saveFile(Employees * employee, int *empCount, float *gross, int* fileChange
         loadMenu(employee, empCount, gross, fileChange);
     }
     char fileName[30];
-    puts("Filename to save?");
+    puts("Filename to save?\n");
     scanf(" %s", fileName);
     puts("Saving...\n");
     FILE *outputFile;
@@ -222,32 +236,15 @@ void saveFile(Employees * employee, int *empCount, float *gross, int* fileChange
     for (int i = 0; i < *empCount; i++)
         {
             printf("\n\nEmployee #%d NAME: %s", i+1, employee[i].name);
-            fprintf(outputFile, "\n\nEmployee #%d NAME: %s", i+1, employee[i].name);
+            fprintf(outputFile, "%d  %s", i+1, employee[i].name);
             
             printf("\nEmployee #%d HOURS worked: %.1f", i+1, employee[i].hours);
-            fprintf(outputFile, "\nEmployee #%d HOURS worked: %.1f", i+1, employee[i].hours);
+            fprintf(outputFile, "%d  %.1f", i+1, employee[i].hours);
             
             printf("\nEmployee #%d RATE hourly: $%.2f", i+1, employee[i].rate);
-            fprintf(outputFile, "\nEmployee #%d RATE hourly: $%.2f", i+1, employee[i].rate);
-            
-            printf("\nEmployee #%d BASE amount: $%.2f", i+1, employee[i].base);
-            fprintf(outputFile, "\nEmployee #%d BASE amount: $%.2f", i+1, employee[i].base);
-            
-            printf("\nEmployee #%d GROSS amount: $%.2f", i+1, employee[i].gross);
-            fprintf(outputFile, "\nEmployee #%d GROSS amount: $%.2f", i+1, employee[i].gross);
-            
-            printf("\nEmployee #%d OVERTIME amount: $%.2f", i+1, employee[i].overtime);
-            fprintf(outputFile, "\nEmployee #%d OVERTIME amount: $%.2f", i+1, employee[i].overtime);
-            
-            printf("\nEmployee #%d TAXES paid: $%.2f", i+1, employee[i].tax);
-            fprintf(outputFile, "\nEmployee #%d TAXES paid: $%.2f", i+1, employee[i].tax);
-            
-            printf("\nEmployee #%d NET paid: $%.2f", i+1, employee[i].net);
-            fprintf(outputFile, "\nEmployee #%d NET paid: $%.2f", i+1, employee[i].net);
+            fprintf(outputFile, "%d  %.2f\n", i+1, employee[i].rate);
         }
-    printf("\n\nTOTAL PAYROLL COST: $%.2f", *gross);
-    fprintf(outputFile,"\n\nTOTAL PAYROLL COST: $%.2f", *gross);
-    printf("SAVED! The following output was saved to file '%s'\n\n\n", fileName);
+    printf("\n\n SAVED!\n\nYour data was saved with the filename '%s'\n\n", fileName);
     fclose(outputFile);
 }
 
@@ -259,7 +256,8 @@ void processMenu(int menuInput, Employees *employee,
     {
         case 1:
             puts("\nYour selection: 1 - LOAD file\n");
-            //code here
+            loadFile(employee, empCount, gross, fileChange);
+            loadMenu(employee, empCount, gross, fileChange);
         case 2:
             puts("\nYour selection: 2 - ADD a record\n");
             addRecord(employee, empCount, gross, fileChange);
@@ -297,7 +295,7 @@ void processMenu(int menuInput, Employees *employee,
                     loadMenu(employee, empCount, gross, fileChange);
                 }
             }
-            puts("\nGoodbye!\n");
+            puts("\nGoodbye! \U0001F44B\n");
             exit(0);
             
         default :
@@ -338,14 +336,11 @@ void splash()
     puts("                                          Developed by Chris Reynolds");
     puts("                                              Coded by Chris Reynolds\n");
     puts("                                                      \U0001FAE0\n");
-    puts("                                         For Professor Glen Cuevas");
-    puts("                                   IVC C Programming - Final Project\n");
+    puts("                                         For Professor Glen Cuevas, IVC");
+    puts("                                          C Programming - Final Project Su2022\n");
     puts("                                                  Version 0.0.5\n");
     puts("\n\n");
-    puts("                                               Press enter to begin\n");
+    puts("                                              Press enter to begin\n");
     getchar();
     system("clear");
 }
-
-
-
