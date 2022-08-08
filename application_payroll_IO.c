@@ -53,12 +53,12 @@ void loadMenu(Employees *employee, int *empCount, float *gross, int *fileChange)
     puts("\n\n\n");
     puts("  MAIN MENU \U0001F6D1");
     puts("  ---------\n\nEnter a selection to continue: \n");
-    puts("  Press 1 to LOAD a record(s)");
+    puts("  Press 1 to LOAD a record(s) from FILE");
     puts("  Press 2 to ADD a record");
     puts("  Press 3 to UPDATE a record");
     puts("  Press 4 to PRINT a record");
     puts("  Press 5 to PRINT ALL records");
-    puts("  Press 6 to SAVE ALL records");
+    puts("  Press 6 to SAVE records to FILE");
     puts("  Press 7 to EXIT application\n");
     scanf(" %d", &menuInput);
     processMenu(menuInput, employee, empCount, gross, fileChange);
@@ -263,10 +263,12 @@ void processMenu(int menuInput, Employees *employee,
         case 2:
             puts("\nYour selection: 2 - ADD a record\n");
             addRecord(employee, empCount, gross, fileChange);
+            *fileChange++;
             loadMenu(employee, empCount, gross, fileChange );
         case 3:
             puts("\nYour selection: 3 - UPDATE a record\n");
             updateRecord(employee, empCount, gross,fileChange);
+            *fileChange++;
             loadMenu(employee, empCount, gross, fileChange);
         case 4  :
             puts("\nYour selection: 4 - PRINT SINGLE record\n");
@@ -279,23 +281,20 @@ void processMenu(int menuInput, Employees *employee,
         case 6:
             puts("\nYour selection: 6 - SAVE file\n");
             saveFile(employee, empCount, gross, fileChange);
+            *fileChange = 0;
             loadMenu(employee, empCount, gross, fileChange);
-
         case 7:
-            if (*empCount >= 1)
+            if (*fileChange > 0)
             {
-                puts("\nYou have unsaved data - SAVE to file?\n");
+                puts("\nYou have unsaved data - SAVE to file? \n\n Save File [Y] or [y]\n Return to Main Menu [R] or [r]\n Exit Without Saving\n");
                 scanf(" %c", &saveChoice);
                 if (saveChoice == 'y' || saveChoice == 'Y')
                 {
                     saveFile(employee, empCount, gross, fileChange);
-                    exit(0);
                 }
-                else
+                else (saveChoice == 'm' || saveChoice == 'Y');
                 {
-                    //redundant from output below - remove on next update
-                    puts("\nGoodbye!\n");
-                    exit(0);
+                    loadMenu(employee, empCount, gross, fileChange);
                 }
             }
             puts("\nGoodbye!\n");
@@ -347,10 +346,6 @@ void splash()
     getchar();
     system("clear");
 }
-
-
-
-
 
 
 
