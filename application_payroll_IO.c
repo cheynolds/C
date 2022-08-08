@@ -23,6 +23,8 @@
 #include <stdio.h>
 #include <string.h> 
 #include <stdlib.h>
+//required for pause while saving
+#include <unistd.h>
 #define _CRT_SECURE_NO_WARNINGS
 #define MAX 20
 
@@ -46,7 +48,8 @@ int getEmp(int *empCount, Employees* employee, float *gross);
 void loadMenu(Employees *employee, int *empCount, float *gross)
 {
     int menuInput = 0;
-    puts("\n\nEnter a selection to continue: \n");
+    puts("MAIN MENU");
+    puts("---------\n\nEnter a selection to continue: \n");
     puts("Press 1 to LOAD a record(s)");
     puts("Press 2 to ADD a record");
     puts("Press 3 to UPDATE a record");
@@ -204,11 +207,12 @@ void splash()
 
 void saveFile(Employees * employee, int *empCount, float *gross)
 {
+    char fileName[30];
     puts("Filename to save?");
-    scanf(" %s", &fileName)
+    scanf(" %s", fileName);
     puts("Saving...");
     sleep(2);
-    puts("Success! The following output was saved to the file '%c'", fileName);
+    printf("Success! The following output was saved to file '%s'", fileName);
     for (int i = 0; i < *empCount; i++)
         {
             printf("\n\nEmployee #%d NAME: %s", i+1, employee[i].name);
@@ -223,7 +227,7 @@ void saveFile(Employees * employee, int *empCount, float *gross)
         
     printf("\n\nTOTAL PAYROLL COST: $%.2f", *gross);
     sleep(2);
-
+    loadMenu(employee, empCount, gross);
 }
 
 void processMenu(int menuInput, Employees *employee, int *empCount, float *gross)
@@ -255,7 +259,7 @@ void processMenu(int menuInput, Employees *employee, int *empCount, float *gross
             saveFile(employee, empCount, gross);
             loadMenu(employee, empCount, gross);
 
-        case 7 :
+        case 7:
             if (*empCount >= 1)
             {
                 puts("\nYou have unsaved data - SAVE to file?\n");
